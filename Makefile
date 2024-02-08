@@ -1,5 +1,5 @@
-raytracer: main.cc
-	clang++ -std=c++11 -stdlib=libc++ main.cc -o raytracer
+raytracer: main.cpp
+	g++ -std=c++11 -stdlib=libc++ main.cpp -o raytracer
 image.ppm: raytracer
 	./raytracer >> image.ppm
 clean: raytracer
