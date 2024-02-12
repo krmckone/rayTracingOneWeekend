@@ -9,7 +9,7 @@
 
 color ray_color(const ray& r, const hittable& world) {
     hit_record rec;
-    if (world.hit(r, 0, infinity, rec)) {
+    if (world.hit(r, interval(0, infinity), rec)) {
         return 0.5 * (rec.normal + color(1,1,1));
     }
 
@@ -20,17 +20,14 @@ color ray_color(const ray& r, const hittable& world) {
 
 int main() {
     // Image Configuration
-
     auto aspect_ratio = 16.0 / 9.0;
-
     int image_width = 400;
+
     int image_height = static_cast<int>(image_width / aspect_ratio);
     image_height = (image_height < 1) ? 1 : image_height;
 
     // World Setup
-
     hittable_list world;
-
     world.add(make_shared<sphere>(point3(0, 0, -1), 0.5));
     world.add(make_shared<sphere>(point3(0, -100.5, -1), 100));
 
@@ -47,7 +44,7 @@ int main() {
     auto pixel_delta_u = viewport_u / image_width;
     auto pixel_delta_v = viewport_v / image_height;
 
-    auto viewport_upper_left = camera_center - vec3(0, 0, focal_length) - viewport_u/2 -viewport_v/2;
+    auto viewport_upper_left = camera_center - vec3(0, 0, focal_length) - viewport_u/2 - viewport_v/2;
     auto pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v);
 
     // Rendering
