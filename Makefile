@@ -1,8 +1,8 @@
-raytracer: main.cc
-	clang++ -std=c++11 -stdlib=libc++ main.cc -o raytracer
-image.ppm: raytracer
+image.ppm: raytracer clean_image
 	./raytracer >> image.ppm
+raytracer: main.cpp *.h
+	g++ -std=c++11 -stdlib=libc++ main.cpp -o raytracer
 clean: raytracer
 	rm raytracer
-clean_image: image.ppm
-	rm image.ppm
+clean_image:
+	rm -f image.ppm
