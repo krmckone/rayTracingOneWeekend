@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+raytracer
+
+# Output image
+image.ppm
